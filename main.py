@@ -31,6 +31,7 @@ MIHOMO_TEMPLATE = {
 
 
 def gen_config():
+    global GLIDER_CONFIG
     with open('mihomo.yaml', 'r') as f:
         clash: dict[str, dict] = yaml.safe_load(f)
 
@@ -48,7 +49,7 @@ def gen_config():
             'mixed-port': proxy_port,
             'proxies': [proxy],
         })
-        new_proxy['proxy-groups']['proxies'] = [proxy_name]
+        new_proxy['proxy-groups'][0]['proxies'] = [proxy_name]
 
         result = yaml.dump(new_proxy)
 

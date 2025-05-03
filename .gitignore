@@ -1,1 +1,5 @@
 config/
+.DS_Store
+glider
+glider.conf
+mihomo
