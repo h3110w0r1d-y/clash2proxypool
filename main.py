@@ -73,11 +73,11 @@ def start_mihomo():
 
 def start_glider():
     command = './glider -config glider.conf'
-    process = Popen(command, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+    process = Popen(command, shell=True)
     MIHOMO_PROCESS.append(process)
 
 
-def kill_processes():
+def kill_processes(signum=None, frame=None):
     for process in MIHOMO_PROCESS:
         process.kill()
     print("\nAll processes terminated.")
@@ -94,6 +94,8 @@ if __name__ == '__main__':
     signal.signal(signal.SIGTERM, kill_processes)
     try:
         while True:
+            if not len(MIHOMO_PROCESS):
+                exit()
             print("\rMihomo and Glider are running...", end='', flush=True)
             for process in MIHOMO_PROCESS:
                 if process.poll() is not None:
